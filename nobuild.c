@@ -3,6 +3,12 @@
 
 #define CFLAGS "-Wall", "-Wextra", "-std=c99", "-pedantic"
 
+#ifndef _WIN32
+    #define CC "clang"
+#else
+    #define CC "cl.exe"
+#endif
+
 void build_tool(const char *tool)
 {
     Cstr tool_path = PATH("tools", tool);

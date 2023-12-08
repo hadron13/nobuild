@@ -921,7 +921,7 @@ void chain_run_sync(Chain chain)
 
 void chain_echo(Chain chain)
 {
-    printf("[INFO] CHAIN:");
+    printf("\033[32m[INFO]\033[0m CHAIN:");
     if (chain.input_filepath) {
         printf(" %s", chain.input_filepath);
     }
@@ -1152,7 +1152,7 @@ void INFO(Cstr fmt, ...)
 {
     va_list args;
     va_start(args, fmt);
-    VLOG(stderr, "INFO", fmt, args);
+    VLOG(stderr, "\033[32mINFO\033[0m", fmt, args);
     va_end(args);
 }
 
@@ -1160,7 +1160,7 @@ void WARN(Cstr fmt, ...)
 {
     va_list args;
     va_start(args, fmt);
-    VLOG(stderr, "WARN", fmt, args);
+    VLOG(stderr, "\033[93mWARN\033[0m", fmt, args);
     va_end(args);
 }
 
@@ -1168,7 +1168,7 @@ void ERRO(Cstr fmt, ...)
 {
     va_list args;
     va_start(args, fmt);
-    VLOG(stderr, "ERRO", fmt, args);
+    VLOG(stderr, "\033[31mERRO\033[0m", fmt, args);
     va_end(args);
 }
 
@@ -1176,18 +1176,7 @@ void PANIC(Cstr fmt, ...)
 {
     va_list args;
     va_start(args, fmt);
-    VLOG(stderr, "ERRO", fmt, args);
+    VLOG(stderr, "\033[31mPANIC\033[0m", fmt, args);
     va_end(args);
-    exit(1);
 }
-
-char *shift_args(int *argc, char ***argv)
-{
-    assert(*argc > 0);
-    char *result = **argv;
-    *argc -= 1;
-    *argv += 1;
-    return result;
-}
-
 #endif // NOBUILD_IMPLEMENTATION
